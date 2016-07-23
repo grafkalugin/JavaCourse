@@ -1,4 +1,13 @@
 apply plugin: 'java'
 apply plugin: 'application'
 mainClassName = "ru.stqa.javacourse.sandbox.HelloWorld"
-
+repositories{
+    mavenCentral()
+}
+dependencies {
+    // https://mvnrepository.com/artifact/org.testng/testng
+    // compile 'org.testng:testng:6.9.10' // альтернативный вариант
+    compile group: 'org.testng', name: 'testng', version: '6.9.10'
+    // https://mvnrepository.com/artifact/org.hamcrest/hamcrest-all
+    compile group: 'org.hamcrest', name: 'hamcrest-all', version: '1.3'
+}
