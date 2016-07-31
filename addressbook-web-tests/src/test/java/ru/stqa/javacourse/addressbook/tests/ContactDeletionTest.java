@@ -17,5 +17,4 @@ public class ContactDeletionTest extends TestBase{
 		app.getContactHelper().deleteOnHomeSubmit();
 		app.getContactHelper().submitOnAlert();
 	}
-
 }

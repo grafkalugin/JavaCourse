@@ -2,15 +2,15 @@ package ru.stqa.javacourse.addressbook.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
-import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.WebDriver;
 
 /**
  * Created by Sunlab on 24.07.16.
  */
 public class HelperBase {
-	protected FirefoxDriver wd;
+	protected WebDriver wd;
 
-	public HelperBase(FirefoxDriver wd) {
+	public HelperBase(WebDriver wd) {
 		this.wd = wd;
 	}
 
