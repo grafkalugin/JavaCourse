@@ -20,8 +20,15 @@ public class HelperBase {
 
 	protected void type(By locator, String text) {
 		click(locator);
-		wd.findElement(locator).clear();
-		wd.findElement(locator).sendKeys(text);
+		if(text != null)
+		{
+			String existingText = wd.findElement(locator).getAttribute("value"); // отдает значение поля ввода
+			if(! text.equals(existingText))
+			{
+				wd.findElement(locator).clear();
+				wd.findElement(locator).sendKeys(text);
+			}
+		}
 	}
 	protected boolean isSelected(By locator) {
 		return wd.findElement(locator).isSelected();

@@ -46,8 +46,8 @@ public class ApplicationManager {
 		if (browser == BrowserType.HTMLUNIT){
 			wd = new HtmlUnitDriver();
 		}
-/*		if (browser == BrowserType.IPHONE){
-			wd = new WebDriver()
+/*	  	if (browser == BrowserType.IPHONE){
+			wd = new AppiumDriver();
 		}
 */
 		wd.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
