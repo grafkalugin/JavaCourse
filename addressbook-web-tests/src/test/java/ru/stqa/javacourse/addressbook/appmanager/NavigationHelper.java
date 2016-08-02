@@ -10,16 +10,15 @@ public class NavigationHelper extends HelperBase{
 	}
 
 	public void goToContactCreation() {
-		click(By.linkText("add new"));
+		goWithChechUrl(By.linkText("add new"), "http://localhost/addressbook/edit.php");
 	}
 
 	public void goToGroup() {
-		click(By.linkText("groups"));
+		goWithChechUrl(By.linkText("groups"), "http://localhost/addressbook/group.php");
 	}
 
 	public void goHome() {
-		click(By.linkText("home"));
+		goWithChechUrl(By.linkText("home"), "http://localhost/addressbook/index.php");
 	}
-
 
 }

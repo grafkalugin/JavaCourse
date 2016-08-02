@@ -2,7 +2,6 @@ package ru.stqa.javacourse.addressbook.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import ru.stqa.javacourse.addressbook.model.GroupData;
 
 
@@ -13,7 +12,7 @@ public class GroupHelper extends HelperBase  {
 	}
 
 	public void returnToGroupPage() {
-		click(By.linkText("group page"));
+		goWithChechUrl(By.linkText("group page"), "http://localhost/addressbook/group.php");
 	}
 
 	public void submitGroupCreation() {
