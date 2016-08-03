@@ -51,7 +51,7 @@ public class HelperBase {
 		try {
 			wd.switchTo().alert();
 			return true;
-		} catch (NoAlertPresentException ex) {
+		} catch (NoAlertPresentException e) {
 			return false;
 		}
 	}
@@ -59,7 +59,7 @@ public class HelperBase {
 		try {
 			wd.findElement(by);
 			return true;
-		} catch (NoSuchElementException ex) {
+		} catch (NoSuchElementException e) {
 			return false;
 		}
 	}
@@ -81,7 +81,7 @@ public class HelperBase {
 			click(locator);}
 	}
 	public void goWithChechElement(By locatorClick, By locatorSearch) {
-		if(!isElementPresent(locatorSearch)){
+		if(! isElementPresent(locatorSearch)){
 			click(locatorClick);}
 	}
 }

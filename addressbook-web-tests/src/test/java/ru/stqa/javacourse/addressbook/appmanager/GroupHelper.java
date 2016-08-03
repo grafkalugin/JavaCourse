@@ -36,7 +36,7 @@ public class GroupHelper extends HelperBase  {
 	}
 
 	public void selectGroup() {
-	    if (!isSelected(By.name("selected[]"))) {
+	    if (! isSelected(By.name("selected[]"))) {
 	        click(By.name("selected[]"));
 	    }
 	}
@@ -47,5 +47,16 @@ public class GroupHelper extends HelperBase  {
 
 	public void submitGroupModification() {
 		click(By.name("update"));
+	}
+
+	public void createGroup(GroupData group) {
+		initGroupCreation();
+		fillGroupForm(group);
+		submitGroupCreation();
+		returnToGroupPage();
+	}
+
+	public boolean  isThereAGroup() {
+		return isElementPresent(By.name("selected[]"));
 	}
 }
