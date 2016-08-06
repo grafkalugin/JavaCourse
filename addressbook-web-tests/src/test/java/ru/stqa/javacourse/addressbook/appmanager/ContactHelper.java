@@ -64,11 +64,11 @@ public class ContactHelper extends HelperBase{
 	}
 
 	public boolean isThereAContact() {
-		return isElementPresent(By.xpath("//div/div[4]/form[2]/table/tbody/tr[2]/td[1]/input"));
+		return isElementPresent(By.xpath("//tr[2]/td[1]/input"));
 	}
 
-	public void createContact(ContactData contactData, boolean b) {
-		fillContactForm(new ContactData("firstname", "middlename", "lastname", "nickname", "address", "89990009988", "email@test.ru", "group name"), true);
+	public void createContact(ContactData contactData) {
+		fillContactForm(contactData, true);
 		submitContactCreation();
 		returnToContactPage();
 	}

@@ -50,7 +50,7 @@ public class ApplicationManager {
 			wd = new AppiumDriver();
 		}
 */
-		wd.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		wd.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		wd.get("http://localhost/addressbook/edit.php");
 		groupHelper = new GroupHelper(wd);
 		navigationHelper = new NavigationHelper(wd);
