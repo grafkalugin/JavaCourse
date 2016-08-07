@@ -12,7 +12,7 @@ public class GroupHelper extends HelperBase  {
 	}
 
 	public void returnToGroupPage() {
-		goWithChechUrl(By.linkText("group page"), "http://localhost/addressbook/group.php");
+		click(By.linkText("group page"));
 	}
 
 	public void submitGroupCreation() {
@@ -35,14 +35,14 @@ public class GroupHelper extends HelperBase  {
 	    click(By.name("delete"));
 	}
 
-	public void selectGroup() {
-	    if (! isSelected(By.name("selected[]"))) {
-	        click(By.name("selected[]"));
-	    }
+	public void selectGroup(int i) {
+	    // устаревшая реализация
+		// if (! isSelected(By.name("selected[]"))) {
+	    //    click(By.name("selected[]"));
+		    wd.findElements(By.name("selected[]")).get(i).click();
 	}
 
 	public void initGroupModification() {
-		click(By.name("selected[]"));
 		click(By.name("edit"));
 	}
 
@@ -59,5 +59,9 @@ public class GroupHelper extends HelperBase  {
 
 	public boolean  isThereAGroup() {
 		return isElementPresent(By.name("selected[]"));
+	}
+
+	public int getGroupCount() {
+		return wd.findElements(By.name("selected[]")).size();
 	}
 }
