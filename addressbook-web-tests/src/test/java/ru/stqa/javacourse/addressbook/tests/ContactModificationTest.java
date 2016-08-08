@@ -1,7 +1,11 @@
 package ru.stqa.javacourse.addressbook.tests;
 
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.stqa.javacourse.addressbook.model.ContactData;
+import ru.stqa.javacourse.addressbook.model.GroupData;
+
+import java.util.List;
 
 public class ContactModificationTest extends TestBase {
 
@@ -12,11 +16,12 @@ public class ContactModificationTest extends TestBase {
 			app.getNavigationHelper().goToContactCreation();
 			app.getContactHelper().createContact(new ContactData("firstname", "middlename", "lastname", "nickname", "address", "89990009988", "email@test.ru", "group name"));
 		}
+		List<GroupData> before = app.getGroupHelper().getGroupList();
 		//int before = app.getGroupHelper().getGroupCount();
 		app.getContactHelper().initModifOrDelet();
 		app.getContactHelper().fillContactForm(new ContactData("firstname", "middlename", "lastname", "nickname", "address", "89990009988", "email@test.ru", null), false);
 		app.getContactHelper().updateSubmit();
-		//int after = app.getGroupHelper().getGroupCount();
-		//Assert.assertEquals(after, before);
+		List<GroupData> after = app.getGroupHelper().getGroupList();
+		Assert.assertEquals(after.size(), before.size());
 	}
 }
