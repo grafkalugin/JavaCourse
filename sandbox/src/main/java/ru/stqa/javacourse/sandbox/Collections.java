@@ -2,7 +2,6 @@ package ru.stqa.javacourse.sandbox;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 
 public class Collections  {
 	public static void main(String[] args){
@@ -13,7 +12,7 @@ public class Collections  {
 		languages.add("Python");
 		languages.add("php");
 		*/
-		List<String> languages = Arrays.asList("Java", "C#", "Python", "php");
+		List<String> languages = Arrays.asList("Java", "C#", "Python", "php"); // Set<String>
 		for (int i = 0; i < langs.length; i++){
 			System.out.println("Я хочу выучить "+langs[i]);
 		}
