@@ -1,14 +1,14 @@
 package ru.stqa.javacourse.addressbook.model;
 
 public class ContactData {
-	private final String firstname;
-	private final String middlename;
-	private final String lastname;
-	private final String nickname;
-	private final String address;
-	private final String phone;
-	private final String email;
-	private  String group;
+	private String firstname;
+	private String middlename;
+	private String lastname;
+	private String nickname;
+	private String address;
+	private String phone;
+	private String email;
+	private String group;
 	private int id;
 
 
@@ -24,11 +24,11 @@ public class ContactData {
 		this.id = id;
 	}
 
-/*	public ContactData(int id, String firstname, String lastname) {
+	public ContactData(int id, String firstname, String lastname) {
 		this.firstname = firstname;
 		this.lastname = lastname;
 		this.id = id;
-	} */
+	}
 
 	@Override
 	public String toString() {
