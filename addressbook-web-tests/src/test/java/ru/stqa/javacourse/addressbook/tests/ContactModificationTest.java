@@ -14,12 +14,12 @@ public class ContactModificationTest extends TestBase {
 		app.getNavigationHelper().goHome();
 		if(! app.getContactHelper().isThereAContact()){
 			app.getNavigationHelper().goToContactCreation();
-			app.getContactHelper().createContact(new ContactData("firstname", "middlename", "lastname", "nickname", "address", "89990009988", "email@test.ru", "group name"));
+			app.getContactHelper().createContact(new ContactData(0, "firstname", "lastname", "middlename","nickname", "address", "89990009988", "email@test.ru", "group name"));
 		}
 		List<GroupData> before = app.getGroupHelper().getGroupList();
 		//int before = app.getGroupHelper().getGroupCount();
 		app.getContactHelper().initModifOrDelet();
-		app.getContactHelper().fillContactForm(new ContactData("firstname", "middlename", "lastname", "nickname", "address", "89990009988", "email@test.ru", null), false);
+		app.getContactHelper().fillContactForm(new ContactData(0, "firstname", "lastname", "middlename", "nickname", "address", "89990009988", "email@test.ru", null), false);
 		app.getContactHelper().updateSubmit();
 		List<GroupData> after = app.getGroupHelper().getGroupList();
 		Assert.assertEquals(after.size(), before.size());

@@ -12,6 +12,12 @@ public class GroupData {
 		this.header = header;
 		this.footer = footer;
 	}
+	public GroupData(String name, String header, String footer) {
+		this.id = Integer.MAX_VALUE;
+		this.name = name;
+		this.header = header;
+		this.footer = footer;
+	}
 
 	@Override
 	public boolean equals(Object o) {
@@ -29,13 +35,7 @@ public class GroupData {
 		return name != null ? name.hashCode() : 0;
 	}
 
-	public GroupData(String name, String header, String footer) {
-		this.id = Integer.MAX_VALUE;
-		this.name = name;
 
-		this.header = header;
-		this.footer = footer;
-	}
 
 	public int getId() {return id;}
 
