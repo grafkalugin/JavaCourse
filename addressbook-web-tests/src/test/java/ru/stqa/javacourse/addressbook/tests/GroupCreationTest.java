@@ -41,7 +41,6 @@ public class GroupCreationTest extends TestBase {
 	    };
 	    */
 
-
 	    // int max1 = after.stream().max((o1, o2) -> Integer.compare(o1.getId(), o2.getId())).get().getId();
 	    //group.setId(after.stream().max((o1, o2) -> Integer.compare(o1.getId(), o2.getId())).get().getId());
 	    before.add(group);
