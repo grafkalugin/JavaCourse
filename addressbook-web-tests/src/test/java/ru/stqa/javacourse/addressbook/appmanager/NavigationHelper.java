@@ -13,7 +13,7 @@ public class NavigationHelper extends HelperBase{
 		goWithChechUrl(By.linkText("add new"), "http://localhost/addressbook/edit.php");
 	}
 
-	public void goToGroup() {
+	public void groupPage() {
 		goWithChechUrl(By.linkText("groups"), "http://localhost/addressbook/group.php");
 	}
 
