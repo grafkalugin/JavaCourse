@@ -6,10 +6,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.javacourse.addressbook.model.ContactData;
+import ru.stqa.javacourse.addressbook.model.Contacts;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created by Sunlab on 24.07.16.
@@ -79,8 +78,8 @@ public class ContactHelper extends HelperBase{
 		returnToContactPage();
 	}
 
-	public Set<ContactData> getContactList() {
-		Set<ContactData> contacts = new HashSet<>();
+	public Contacts getContactList() {
+		Contacts contacts = new Contacts();
 		List<WebElement> elements = wd.findElements(By.name("entry"));
 		for(WebElement element: elements){
 			String lastname = element.findElement(By.xpath("//td[2]")).getText();

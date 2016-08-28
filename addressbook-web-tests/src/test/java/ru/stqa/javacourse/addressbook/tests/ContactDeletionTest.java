@@ -1,10 +1,11 @@
 package ru.stqa.javacourse.addressbook.tests;
 
-import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.stqa.javacourse.addressbook.model.ContactData;
+import ru.stqa.javacourse.addressbook.model.Contacts;
 
-import java.util.Set;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 
 public class ContactDeletionTest extends TestBase{
@@ -29,15 +30,14 @@ public class ContactDeletionTest extends TestBase{
 							.withPhone("89990009988")
 							.withEmail("email@test.ru")
 							.withGroup("group name"));
-			//ContactData contactdata = new ContactData().withId(Integer.MAX_VALUE).withFirstname("firstname").withLastname("lastname").withMiddlename("middlename").withNickname("nickname").withAddress("address").withPhone("89990009988").withEmail("email@test.ru").withGroup("group name");
 		}
-		Set<ContactData> before = app.getContactHelper().getContactList();
+
+		Contacts before = app.getContactHelper().getContactList();
 		ContactData deletedContact = before.iterator().next();
 		app.getContactHelper().delete(deletedContact);
 		app.goTo().goHome();
-		Set<ContactData> after = app.getContactHelper().getContactList();
-		Assert.assertEquals(after.size(), before.size() - 1);
-		before.remove(deletedContact);
-		Assert.assertEquals(after, before);
+		Contacts after = app.getContactHelper().getContactList();
+		assertThat(after.size(), equalTo(before.size() - 1));
+		assertThat(after, equalTo(before.without(deletedContact)));
 	}
 }
