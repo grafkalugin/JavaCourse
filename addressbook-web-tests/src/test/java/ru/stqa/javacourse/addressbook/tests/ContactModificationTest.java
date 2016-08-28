@@ -12,11 +12,11 @@ public class ContactModificationTest extends TestBase {
 	@Test//(enabled = false)
 	public void testContactModification() {
 		app.goTo().goHome();
-		if(! app.getContactHelper().isThereAContact()){
+		if(! app.contact().isThereAContact()){
 			app.goTo().goToContactCreation();
-			app.getContactHelper().createContact(new ContactData().withId(0).withFirstname("firstname").withLastname("lastname").withMiddlename("middlename").withNickname("nickname").withAddress("address").withPhone("89990009988").withEmail("email@test.ru").withGroup("group name"));
+			app.contact().createContact(new ContactData().withId(0).withFirstname("firstname").withLastname("lastname").withMiddlename("middlename").withNickname("nickname").withAddress("address").withPhone("89990009988").withEmail("email@test.ru").withGroup("group name"));
 		}
-		Contacts before = app.getContactHelper().getContactList();
+		Contacts before = app.contact().getContactList();
 		ContactData modifiedContact = before.iterator().next();
 		ContactData contact = new ContactData()
 				.withId(modifiedContact.getId())
@@ -27,13 +27,12 @@ public class ContactModificationTest extends TestBase {
 				.withAddress("address")
 				.withPhone("89990009988")
 				.withEmail("email@test.ru");
-		app.getContactHelper().modifiContact(modifiedContact, contact);
+		app.contact().modifiContact(modifiedContact, contact);
 		app.goTo().goHome();
-		Contacts after = app.getContactHelper().getContactList();
-		assertThat(after.size(), equalTo(before.size()));
+		assertThat(app.contact().count(), equalTo(before.size()));
+		Contacts after = app.contact().getContactList();
 		//before.remove(modifiedContact);
 		//before.add(contact);
-		//System.out.println(after.size()+ " and " + before.size());
 		assertThat(after, equalTo(before.without(modifiedContact).withAdded(contact)));
 	}
 }

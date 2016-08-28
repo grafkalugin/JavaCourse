@@ -9,18 +9,18 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 
 public class ContactDeletionTest extends TestBase{
-	@Test//(enabled = false)
+	@Test (enabled = false)
 	public void testContactDeletion1() {
 		app.goTo().goHome();
-		app.getContactHelper().initModifOrDelet(1);
-		app.getContactHelper().deleteSubmit();
+		app.contact().initModifOrDelet(1);
+		app.contact().deleteSubmit();
 	}
 	@Test //(enabled = false)
 	public void testContactDeletion2() {
 		app.goTo().goHome();
-		if(! app.getContactHelper().isThereAContact()){
+		if(! app.contact().isThereAContact()){
 			app.goTo().goToContactCreation();
-			app.getContactHelper()
+			app.contact()
 					.createContact(new ContactData()
 							.withId(0).withFirstname("firstname")
 							.withLastname("lastname")
@@ -32,12 +32,12 @@ public class ContactDeletionTest extends TestBase{
 							.withGroup("group name"));
 		}
 
-		Contacts before = app.getContactHelper().getContactList();
+		Contacts before = app.contact().getContactList();
 		ContactData deletedContact = before.iterator().next();
-		app.getContactHelper().delete(deletedContact);
+		app.contact().delete(deletedContact);
 		app.goTo().goHome();
-		Contacts after = app.getContactHelper().getContactList();
-		assertThat(after.size(), equalTo(before.size() - 1));
+		assertThat(app.contact().count(), equalTo(before.size() - 1));
+		Contacts after = app.contact().getContactList();
 		assertThat(after, equalTo(before.without(deletedContact)));
 	}
 }

@@ -29,9 +29,9 @@ public class GroupModificationTest extends TestBase {
 				.withHeader("test4")
 				.withFooter("test5");
 		app.group().modify(group);
+		assertThat(app.group().count(), equalTo(before.size()));
 		Groups after = app.group().all();
 		//Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after)); // сравнение списков преобразованных в множества
-		assertThat(after.size(), equalTo(before.size()));
 		assertThat(after, equalTo(before.without(modifiedGroup).withAdded(group)));
 	}
 }

@@ -12,7 +12,7 @@ public class ContactCreationTest extends TestBase {
 	@Test//(enabled = false)
     public void testContactCreation() {
 		app.goTo().goHome();
-		Contacts before = app.getContactHelper().getContactList();
+		Contacts before = app.contact().getContactList();
 	    app.goTo().goToContactCreation();
 		ContactData contactdata = new ContactData()
 				.withFirstname("firstname")
@@ -23,9 +23,9 @@ public class ContactCreationTest extends TestBase {
 				.withPhone("89990009988")
 				.withEmail("email@test.ru")
 				.withGroup("group name");
-		app.getContactHelper().createContact(contactdata);
-		Contacts after = app.getContactHelper().getContactList();
-		assertThat(after.size(), equalTo(before.size() +  1));
+		app.contact().createContact(contactdata);
+		assertThat(app.contact().count(), equalTo(before.size() +  1));
+		Contacts after = app.contact().getContactList();
 		assertThat(after, equalTo(before.withAdded(contactdata.withId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt()))));
 
 	}
