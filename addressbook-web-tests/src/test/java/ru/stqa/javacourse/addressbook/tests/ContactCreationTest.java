@@ -12,7 +12,7 @@ public class ContactCreationTest extends TestBase {
 	@Test//(enabled = false)
     public void testContactCreation() {
 		app.goTo().goHome();
-		Contacts before = app.contact().getContactList();
+		Contacts before = app.contact().allContacts();
 	    app.goTo().goToContactCreation();
 		ContactData contactdata = new ContactData()
 				.withFirstname("firstname")
@@ -25,7 +25,7 @@ public class ContactCreationTest extends TestBase {
 				.withGroup("group name");
 		app.contact().createContact(contactdata);
 		assertThat(app.contact().count(), equalTo(before.size() +  1));
-		Contacts after = app.contact().getContactList();
+		Contacts after = app.contact().allContacts();
 		assertThat(after, equalTo(before.withAdded(contactdata.withId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt()))));
 
 	}

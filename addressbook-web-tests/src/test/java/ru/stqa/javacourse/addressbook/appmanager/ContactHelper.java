@@ -81,17 +81,22 @@ public class ContactHelper extends HelperBase{
 
 	private Contacts contactCache = null;
 
-	public Contacts getContactList() {
+	public Contacts allContacts() {
 		if(contactCache != null){
 			return new Contacts(contactCache);
 		}
 		contactCache = new Contacts();
 		List<WebElement> elements = wd.findElements(By.name("entry"));
 		for(WebElement element: elements){
-			String lastname = element.findElement(By.xpath("//td[2]")).getText();
-			String firstname = element.findElement(By.xpath("//td[3]")).getText();
+			List<WebElement> cells = element.findElements(By.tagName("td"));
+			String lastname =  cells.get(1).getText();   //(By.xpath("//td[2]")).getText();
+			String firstname = cells.get(2).getText();  //(By.xpath("//td[3]")).getText();
+			// прямая проверка String[] phones = cells.get(5).getText().split("\n"); - для прямой проверки
+			String allPhones = cells.get(5).getText();
 			int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-			contactCache.add(new ContactData().withId(id).withLastname(lastname).withFirstname(firstname));
+			// прямая проверка contactCache.add(new ContactData().withId(id).withLastname(lastname).withFirstname(firstname).withHomePhone(phones[0]).withMobilePhone(phones[1]).withWorkPhone(phones[2]));
+			contactCache.add(new ContactData().withId(id).withLastname(lastname).withFirstname(firstname)
+					.withAllPhones(allPhones));
 		}
 		return new Contacts((contactCache));
 	}
@@ -115,5 +120,27 @@ public class ContactHelper extends HelperBase{
 	}
 	public int count() {
 		return wd.findElements(By.name("selected[]")).size();
+	}
+
+	public ContactData infoFormEditForm(ContactData contact) {
+		initContactModificationById(contact.getId());
+		String firstname = wd.findElement(By.name("firstname")).getAttribute("value");
+		String lastname = wd.findElement(By.name("lastname")).getAttribute("value");
+		String home = wd.findElement(By.name("home")).getAttribute("value");
+		String mobile = wd.findElement(By.name("mobile")).getAttribute("value");
+		String work = wd.findElement(By.name("work")).getAttribute("value");
+		wd.navigate().back();
+		return new ContactData().withId(contact.getId()).withFirstname(firstname).withLastname(lastname).withHomePhone(home).withMobilePhone(mobile).withWorkPhone(work);
+	}
+
+	private void initContactModificationById(int id) {
+		WebElement checkbox = wd.findElement(By.cssSelector(String.format("input[value='%s']", id))); // находим чек
+		WebElement row = checkbox.findElement(By.xpath("./../..")); // переход к родительскому элементу (2) //  первая точка - поиск начинается с текущего элемента
+		List<WebElement> cells2 = row.findElements(By.tagName("td"));
+		cells2.get(7).findElement(By.tagName("a")).click();
+
+		//wd.findElement(By.xpath(String.format("//input[@value='%s']/../../td[8]/a", id))).click(); // xpath - нумерация начинается с 1 // String.format - подставляет произвольное кол-во значений, указываются через запятую после id
+		//wd.findElement(By.xpath(String.format("//tr[.//input[@value='%s']]/td[8]/a", id))).click(); Найти tr у которой input-value (подзапрос начинается с точки) - в ней 8ую ячейку и ссылку
+		//wd.findElement(By.cssSelector(String.format("a[href='edit.php?id=%s']", id))).click(); // String.format("I like %s and %s", "apples", "oranges")
 	}
 }

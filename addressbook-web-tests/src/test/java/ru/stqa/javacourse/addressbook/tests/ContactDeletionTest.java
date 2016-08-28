@@ -32,12 +32,12 @@ public class ContactDeletionTest extends TestBase{
 							.withGroup("group name"));
 		}
 
-		Contacts before = app.contact().getContactList();
+		Contacts before = app.contact().allContacts();
 		ContactData deletedContact = before.iterator().next();
 		app.contact().delete(deletedContact);
 		app.goTo().goHome();
 		assertThat(app.contact().count(), equalTo(before.size() - 1));
-		Contacts after = app.contact().getContactList();
+		Contacts after = app.contact().allContacts();
 		assertThat(after, equalTo(before.without(deletedContact)));
 	}
 }
