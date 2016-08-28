@@ -14,7 +14,6 @@ public class ContactCreationTest extends TestBase {
 		app.goTo().goHome();
 		Contacts before = app.getContactHelper().getContactList();
 	    app.goTo().goToContactCreation();
-		//ContactData contactdata = new ContactData(Integer.MAX_VALUE, "firstname", "lastname", "middlename", "nickname", "address", "89990009988", "email@test.ru", "group name");
 		ContactData contactdata = new ContactData()
 				.withFirstname("firstname")
 				.withLastname("lastname")
