@@ -20,15 +20,16 @@ public class GroupModificationTest extends TestBase {
 
 	@Test
 	public void testGroupModification() {
-
 		Set<GroupData> before = app.group().all();
 		GroupData modifiedGroup = before.iterator().next();
 		GroupData group = new GroupData()
-				.withId(modifiedGroup.getId()).withName("test3").withHeader("test4").withFooter("test5");
+				.withId(modifiedGroup.getId())
+				.withName("test3")
+				.withHeader("test4")
+				.withFooter("test5");
 		app.group().modify(group);
 		Set<GroupData> after = app.group().all();
 		Assert.assertEquals(after.size(), before.size());
-
 		before.remove(modifiedGroup);
 		before.add(group);
 		//Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after)); // сравнение списков преобразованных в множества
