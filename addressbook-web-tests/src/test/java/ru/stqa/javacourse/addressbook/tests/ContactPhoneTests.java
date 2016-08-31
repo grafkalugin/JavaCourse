@@ -45,14 +45,14 @@ public class ContactPhoneTests extends TestBase{
 		assertThat(contact.getMobilePhone(), equalTo(cleaned(contactInfoFormEditForm.getMobilePhone())));
 		assertThat(contact.getWorkPhone(), equalTo(cleaned(contactInfoFormEditForm.getWorkPhone())));
 		*/
-
+		/* --- testing
 		System.out.println(contact.getAllPhones());
 		System.out.println(mergePhones(contactInfoFormEditForm));
 		System.out.println(contact.getAllEmails());
 		System.out.println(mergeEmail(contactInfoFormEditForm));
 		System.out.println(contact.getAddress());
 		System.out.println(contactInfoFormEditForm.getAddress());
-		
+		*/
 		assertThat(contact.getAllPhones(), equalTo(mergePhones(contactInfoFormEditForm)));
 		assertThat(contact.getAllEmails(), equalTo(mergeEmail(contactInfoFormEditForm)));
 		assertThat(contact.getAddress(), equalTo(contactInfoFormEditForm.getAddress()));
