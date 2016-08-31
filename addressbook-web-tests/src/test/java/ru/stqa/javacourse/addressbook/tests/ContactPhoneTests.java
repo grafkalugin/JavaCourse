@@ -14,6 +14,25 @@ public class ContactPhoneTests extends TestBase{
 	@Test
 	public void testContactPhones(){
 		app.goTo().goHome();
+
+		if(! app.contact().isThereAContact()){
+			app.goTo().goToContactCreation();
+			app.contact()
+					.createContact(new ContactData()
+							.withId(0).withFirstname("firstname")
+							.withLastname("lastname")
+							.withMiddlename("middlename")
+							.withNickname("nickname")
+							.withAddress("address")
+							.withWorkPhone("89990009911")
+							.withMobilePhone("89990009922")
+							.withHomePhone("899900099833")
+							.withEmail("1email@test.ru")
+							.withEmail2("2email@test.ru")
+							.withEmail3("3email@test.ru")
+							.withGroup("group name"));
+		}
+
 		ContactData contact = app.contact().allContacts().iterator().next();
 		ContactData contactInfoFormEditForm = app.contact().infoFormEditForm(contact);
 		/* прямые проверки
@@ -21,7 +40,26 @@ public class ContactPhoneTests extends TestBase{
 		assertThat(contact.getMobilePhone(), equalTo(cleaned(contactInfoFormEditForm.getMobilePhone())));
 		assertThat(contact.getWorkPhone(), equalTo(cleaned(contactInfoFormEditForm.getWorkPhone())));
 		*/
+		/* --- testing
+		System.out.println(contact.getAllPhones());
+		System.out.println(mergePhones(contactInfoFormEditForm));
+		System.out.println(contact.getAllEmails());
+		System.out.println(mergeEmail(contactInfoFormEditForm));
+		System.out.println(contact.getAddress());
+		System.out.println(contactInfoFormEditForm.getAddress());
+		*/
 		assertThat(contact.getAllPhones(), equalTo(mergePhones(contactInfoFormEditForm)));
+		assertThat(contact.getAllEmails(), equalTo(mergeEmail(contactInfoFormEditForm)));
+		assertThat(contact.getAddress(), equalTo(contactInfoFormEditForm.getAddress()));
+	}
+
+	private String mergeEmail(ContactData contact) {
+
+		return Arrays.asList(contact.getEmail(), contact.getEmail2(), contact.getEmail3())
+				.stream()
+				.filter((s) -> ! s.equals(""))
+				.map(ContactPhoneTests::cleanedEmail)
+				.collect(Collectors.joining("\n"));
 	}
 
 	private String mergePhones(ContactData contact) {
@@ -54,5 +92,8 @@ public class ContactPhoneTests extends TestBase{
 
 	public static String cleaned (String phone){
 		return phone.replaceAll("\\s", "").replaceAll("[-()]", ""); // регулярные выражения \\s - пробельные символы  // [a-z] все буквы от и до // [-az] заменить эти символы
+	}
+	public static String cleanedEmail (String email){
+		return email.replaceAll("\\s", "");
 	}
 }
