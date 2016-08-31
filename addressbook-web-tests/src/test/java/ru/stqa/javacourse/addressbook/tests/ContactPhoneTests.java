@@ -1,5 +1,6 @@
 package ru.stqa.javacourse.addressbook.tests;
 
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.javacourse.addressbook.model.ContactData;
 
@@ -11,10 +12,9 @@ import static org.hamcrest.Matchers.equalTo;
 
 public class ContactPhoneTests extends TestBase{
 
-	@Test
-	public void testContactPhones(){
+	@BeforeMethod
+	public void createContactBeforeTestContactPhones(){
 		app.goTo().goHome();
-
 		if(! app.contact().isThereAContact()){
 			app.goTo().goToContactCreation();
 			app.contact()
@@ -29,9 +29,14 @@ public class ContactPhoneTests extends TestBase{
 							.withHomePhone("899900099833")
 							.withEmail("1email@test.ru")
 							.withEmail2("2email@test.ru")
-							.withEmail3("3email@test.ru")
-							.withGroup("group name"));
+							.withEmail3("3email@test.ru"));
 		}
+	}
+
+	@Test
+	public void testContactPhones(){
+		app.goTo().goHome();
+
 
 		ContactData contact = app.contact().allContacts().iterator().next();
 		ContactData contactInfoFormEditForm = app.contact().infoFormEditForm(contact);
@@ -40,14 +45,14 @@ public class ContactPhoneTests extends TestBase{
 		assertThat(contact.getMobilePhone(), equalTo(cleaned(contactInfoFormEditForm.getMobilePhone())));
 		assertThat(contact.getWorkPhone(), equalTo(cleaned(contactInfoFormEditForm.getWorkPhone())));
 		*/
-		/* --- testing
+
 		System.out.println(contact.getAllPhones());
 		System.out.println(mergePhones(contactInfoFormEditForm));
 		System.out.println(contact.getAllEmails());
 		System.out.println(mergeEmail(contactInfoFormEditForm));
 		System.out.println(contact.getAddress());
 		System.out.println(contactInfoFormEditForm.getAddress());
-		*/
+		
 		assertThat(contact.getAllPhones(), equalTo(mergePhones(contactInfoFormEditForm)));
 		assertThat(contact.getAllEmails(), equalTo(mergeEmail(contactInfoFormEditForm)));
 		assertThat(contact.getAddress(), equalTo(contactInfoFormEditForm.getAddress()));
