@@ -143,7 +143,6 @@ public class ContactHelper extends HelperBase{
 		String email = wd.findElement(By.name("email")).getAttribute("value");
 		String email2 = wd.findElement(By.name("email2")).getAttribute("value");
 		String email3 = wd.findElement(By.name("email3")).getAttribute("value");
-		//String address = wd.findElement(By.cssSelector("textarea[name='address']")).getText();
 		String address = wd.findElement(By.name("address")).getText();
 		wd.navigate().back();
 		return new ContactData().withId(contact.getId()).withFirstname(firstname).withLastname(lastname).withHomePhone(home).withMobilePhone(mobile).withWorkPhone(work).withEmail(email).withEmail2(email2).withEmail3(email3).withAddress(address);
@@ -158,5 +157,32 @@ public class ContactHelper extends HelperBase{
 		//wd.findElement(By.xpath(String.format("//input[@value='%s']/../../td[8]/a", id))).click(); // xpath - нумерация начинается с 1 // String.format - подставляет произвольное кол-во значений, указываются через запятую после id
 		//wd.findElement(By.xpath(String.format("//tr[.//input[@value='%s']]/td[8]/a", id))).click(); Найти tr у которой input-value (подзапрос начинается с точки) - в ней 8ую ячейку и ссылку
 		//wd.findElement(By.cssSelector(String.format("a[href='edit.php?id=%s']", id))).click(); // String.format("I like %s and %s", "apples", "oranges")
+	}
+/*
+	public ContactData infoFromInfoPage(ContactData contact) {
+		openContactInfoById(contact.getId());
+		String firstAndLastName = wd.findElement(By.cssSelector("#content b")).getText();
+		String home = wd.findElements(By.cssSelector("#content br")).get(2).getText();
+		String mobile = wd.findElements(By.cssSelector("#content br")).get(3).getText();
+		String work = wd.findElements(By.cssSelector("#content br")).get(4).getText();
+		String allPhones = home + mobile + work;
+		String address = wd.findElements(By.cssSelector("#content br")).get(0).getText();
+		List<WebElement> allEmails = wd.findElements(By.xpath("//a[contains(@href,'mailto')]")); // [href='mailto:qwerty@wertyu.ru']
+		return new ContactData().withId(contact.getId()).withFirstAndLastName(firstAndLastName).withAllPhones(allPhones).withAddress(address); //.withAllEmails(allEmails)
+	}
+*/
+
+	public ContactData infoFromInfoPage(ContactData contact) {
+		openContactInfoById(contact.getId());
+		String allDataFromInfoPage = wd.findElement(By.id("content")).getText();
+		return new ContactData().withAllDataFromInfoPage(allDataFromInfoPage);
+	}
+
+
+	private void openContactInfoById(int id) {
+		WebElement checkbox = wd.findElement(By.cssSelector(String.format("input[value='%s']", id))); // находим чек
+		WebElement row = checkbox.findElement(By.xpath("./../..")); // переход к родительскому элементу (2) //  первая точка - поиск начинается с текущего элемента
+		List<WebElement> cells3 = row.findElements(By.tagName("td"));
+		cells3.get(6).findElement(By.tagName("a")).click();
 	}
 }
