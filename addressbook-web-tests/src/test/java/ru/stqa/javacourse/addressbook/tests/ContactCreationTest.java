@@ -38,9 +38,8 @@ public class ContactCreationTest extends TestBase {
 		File currentDir = new File(".");
 		System.out.println(currentDir.getAbsolutePath()); // /Users/Sunlab/JavaCourse/addressbook-web-tests/.
 		File photo = new File("src/test/resources/stru.png");
-		System.out.println(photo.getAbsolutePath());
-		System.out.println(photo.exists());
+		System.out.println(photo.getAbsolutePath()); // получить абсолютный путь
+		System.out.println(photo.exists()); // Файл существует
 	}
-
 
 }

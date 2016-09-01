@@ -39,6 +39,7 @@ public class ContactHelper extends HelperBase{
 		type(By.name("email"), contactData.getEmail());
 		type(By.name("email2"), contactData.getEmail2());
 		type(By.name("email3"), contactData.getEmail3());
+		attach(By.name("photo"), contactData.getPhoto());
 		if(creation && contactData.getGroup() != null){
 			new Select(wd.findElement(By.name("group name"))).selectByVisibleText(contactData.getGroup());
 		}
@@ -77,7 +78,7 @@ public class ContactHelper extends HelperBase{
 	}
 
 	public void createContact(ContactData contactData) {
-		fillContactForm(contactData, true);
+		fillContactForm(contactData, false);
 		submitContactCreation();
 		contactCache = null;
 		returnToContactPage();

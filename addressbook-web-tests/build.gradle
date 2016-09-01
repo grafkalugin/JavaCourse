@@ -12,6 +12,7 @@ dependencies {
     compile 'org.seleniumhq.selenium:selenium-java:2.53.1'
     compile 'io.appium:java-client:4.0.0'
     compile 'org.hamcrest:java-hamcrest:2.0.0.0'
+    compile 'com.beust:jcommander:1.48'
 }
 test {
     useTestNG()
