@@ -1,5 +1,6 @@
 package ru.stqa.javacourse.addressbook.tests;
 
+import com.thoughtworks.xstream.XStream;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import ru.stqa.javacourse.addressbook.model.GroupData;
@@ -9,9 +10,9 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -20,15 +21,21 @@ public class GroupCreationTest extends TestBase {
 
 	@DataProvider
 	public Iterator<Object[]> validGroups() throws IOException {
-		List<Object[]> list = new ArrayList<Object[]>();
-		BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/groups.csv")));
+		//List<Object[]> list = new ArrayList<Object[]>(); // не нужен в xml
+		BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/groups.xml"))); // нужно менять расширение файла
+		String xml = "";
 		String line = reader.readLine();
 		while (line != null){
-			String[] split = line.split(";");
-			list.add(new Object[] {new GroupData().withName(split[0]).withHeader(split[1]).withFooter(split[2])});
+			//String[] split = line.split(";"); // нужен для csv
+			//list.add(new Object[] {new GroupData().withName(split[0]).withHeader(split[1]).withFooter(split[2])}); // нужен для csv
+			xml += line;
 			line = reader.readLine();
 		}
-		return list.iterator();
+		XStream xStream = new XStream();
+		xStream.processAnnotations(GroupData.class); // обработка аннотаций
+		List<GroupData> groups = (List<GroupData>) xStream.fromXML(xml); // в скобках идёт приведение типа
+		return groups.stream().map((g) -> new Object[] {g}).collect(Collectors.toList()).iterator(); // map к каждому объекту применяет функцию, которая заворачивает его в массив состоящий из этого объекта // collect из потока собирает список // и у списка берем итератор
+		//return list.iterator(); - не нужно в xml
 	}
 
     @Test(dataProvider = "validGroups")
