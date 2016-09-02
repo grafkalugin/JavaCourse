@@ -1,0 +1,57 @@
+[
+  {
+    "firstname": "Firstname 0",
+    "lastname": "Lastname 0",
+    "address": "Address 0",
+    "email": "test0@mail.ru",
+    "email2": "test0@mail.ru",
+    "email3": "test0@mail.ru",
+    "homePhone": "89190010100",
+    "mobilePhone": "89190010200",
+    "workPhone": "89190010300"
+  },
+  {
+    "firstname": "Firstname 1",
+    "lastname": "Lastname 1",
+    "address": "Address 1",
+    "email": "test1@mail.ru",
+    "email2": "test1@mail.ru",
+    "email3": "test1@mail.ru",
+    "homePhone": "89190010101",
+    "mobilePhone": "89190010201",
+    "workPhone": "89190010301"
+  },
+  {
+    "firstname": "Firstname 2",
+    "lastname": "Lastname 2",
+    "address": "Address 2",
+    "email": "test2@mail.ru",
+    "email2": "test2@mail.ru",
+    "email3": "test2@mail.ru",
+    "homePhone": "89190010102",
+    "mobilePhone": "89190010202",
+    "workPhone": "89190010302"
+  },
+  {
+    "firstname": "Firstname 3",
+    "lastname": "Lastname 3",
+    "address": "Address 3",
+    "email": "test3@mail.ru",
+    "email2": "test3@mail.ru",
+    "email3": "test3@mail.ru",
+    "homePhone": "89190010103",
+    "mobilePhone": "89190010203",
+    "workPhone": "89190010303"
+  },
+  {
+    "firstname": "Firstname 4",
+    "lastname": "Lastname 4",
+    "address": "Address 4",
+    "email": "test4@mail.ru",
+    "email2": "test4@mail.ru",
+    "email3": "test4@mail.ru",
+    "homePhone": "89190010104",
+    "mobilePhone": "89190010204",
+    "workPhone": "89190010304"
+  }
+]

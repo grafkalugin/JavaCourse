@@ -1,21 +1,31 @@
 package ru.stqa.javacourse.addressbook.model;
 
+import com.google.gson.annotations.Expose;
+
 import java.io.File;
 
 public class ContactData {
-
+	@Expose // поле помеченное для добавления в json
 	private String firstname;
 	private String middlename;
+	@Expose
 	private String lastname;
 	private String nickname;
+	@Expose
 	private String address;
 	private String phone;
+	@Expose
 	private String email;
+	@Expose
 	private String email2;
+	@Expose
 	private String email3;
 	private String group;
+	@Expose
 	private String homePhone;
+	@Expose
 	private String mobilePhone;
+	@Expose
 	private String workPhone;
 	private String allPhones;
 	private String allEmails;
