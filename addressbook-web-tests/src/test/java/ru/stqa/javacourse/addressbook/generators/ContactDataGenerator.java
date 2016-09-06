@@ -52,9 +52,9 @@ public class ContactDataGenerator {
 		//Gson gson = new Gson(); // дефолтное форматирование
 		Gson gson = new GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().create(); // pretty - красивое форматирование // excludeFieldsWithoutExposeAnnotation() - учёт всех необходимых полей, помеченных в классе объекте (GroupData)
 		String json = gson.toJson(contacts);
-		Writer writer = new FileWriter(file);
-		writer.write(json);
-		writer.close();
+		try(Writer writer = new FileWriter(file)){
+			writer.write(json);
+		}
 	}	private List<ContactData> generatorContacts(int count) {
 		List<ContactData> contacts = new ArrayList<ContactData>();
 		for(int i = 0; i < count; i++) {

@@ -61,9 +61,10 @@ public class GroupDataGenerator {
 		//Gson gson = new Gson(); // дефолтное форматирование
 		Gson gson = new GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().create(); // pretty - красивое форматирование // excludeFieldsWithoutExposeAnnotation() - учёт всех необходимых полей, помеченных в классе объекте (GroupData)
 		String json = gson.toJson(groups);
-		Writer writer = new FileWriter(file);
-		writer.write(json);
-		writer.close();
+		try (Writer writer = new FileWriter(file)){
+			writer.write(json);
+		}
+		// writer.close(); с конструкцией try закрывать файл не нужно, инициализация -> использование
 	}
 
 	private void saveAsXml(List<GroupData> groups, File file) throws IOException {
@@ -71,17 +72,17 @@ public class GroupDataGenerator {
 		//xStream.alias("group", GroupData.class); // меняет названия объектов в xml (нужно использовать без нижней строчки(простой вариант)
 		xStream.processAnnotations(GroupData.class);
 		String xml = xStream.toXML(groups);
-		Writer writer = new FileWriter(file);
-		writer.write(xml);
-		writer.close();
+		try(Writer writer = new FileWriter(file)){
+			writer.write(xml);
+		}
 	}
 
 	private void saveAsCsv(List<GroupData> groups, File file) throws IOException {
-		Writer writer = new FileWriter(file);
+		try (Writer writer = new FileWriter(file)) {
 		for(GroupData group : groups) {
 			writer.write(String.format("%s;%s;%s\n", group.getName(), group.getHeder(), group.getFooter()));
 		}
-		writer.close();
+		}
 	}
 
 	private List<GroupData> generatorGroups(int count) {
