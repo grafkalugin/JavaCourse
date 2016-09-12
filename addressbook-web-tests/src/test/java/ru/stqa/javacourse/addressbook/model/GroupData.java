@@ -3,6 +3,7 @@ package ru.stqa.javacourse.addressbook.model;
 import com.google.gson.annotations.Expose;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,13 +11,13 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @XStreamAlias("group")
-@Entity//объявляет GroupData привязанной к базе
-@Table(name="group_list")//привязка к таблице // если бы название столбца совпадало с названием атрибута, то доп привязка бы была не нужна
+@Entity //объявляет GroupData привязанной к базе
+@Table (name="group_list")//привязка к таблице // если бы таблица называлась как класс, то доп параметры были бы не нужны
 public class GroupData {
 
 	@XStreamOmitField // - убрать следующее поле из xml
 	@Id // так как это id, присваивается особая аннотация
-	@Column(name = "group_id")//привязка к столбцу таблицы // если бы название столбца совпадало с названием атрибута, то доп привязка бы была не нужна // id vs group_id
+	@Column(name = "group_id")//привязка к столбцу таблицы // если бы название столбца совпадало с названием атрибута, то доп привязка бы была не нужна // аттрибут id vs название столбца group_id
 	private int id = Integer.MAX_VALUE;
 
 	@Expose // поле помеченное для добавления в json
@@ -25,10 +26,12 @@ public class GroupData {
 
 	@Expose
 	@Column(name = "group_header")
+	@Type(type = "text")
 	private  String header;
 
 	@Expose
 	@Column(name = "group_footer")
+	@Type(type = "text")
 	private  String footer;
 
 	public int getId() {return id;}
