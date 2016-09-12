@@ -13,15 +13,5 @@
     "name": "test 2",
     "header": "header\n 2",
     "footer": "footer\n 2"
-  },
-  {
-    "name": "test 3",
-    "header": "header\n 3",
-    "footer": "footer\n 3"
-  },
-  {
-    "name": "test 4",
-    "header": "header\n 4",
-    "footer": "footer\n 4"
   }
 ]

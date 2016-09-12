@@ -52,7 +52,7 @@ public class ContactInfoAboutContactTest extends TestBase{
 				contact.getEmail3())
 				.stream()
 				.filter((s) -> ! s.equals(""))
-				.map(ContactPhoneTests::cleanedEmail)
+				.map(ContactPhoneTest::cleanedEmail)
 				.collect(Collectors.joining(""));
 	}
 

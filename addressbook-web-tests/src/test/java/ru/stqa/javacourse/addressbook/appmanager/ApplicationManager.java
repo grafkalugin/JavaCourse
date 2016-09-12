@@ -25,19 +25,19 @@ public class ApplicationManager {
 	}
 
 	public void init() {
-		if (browser == BrowserType.FIREFOX){
+		if (browser.equals(BrowserType.FIREFOX)){
 			wd = new FirefoxDriver();
 		}
-		else  if (browser == BrowserType.CHROME){
+		else  if (browser.equals(BrowserType.CHROME)){
 			wd = new ChromeDriver();
 		}
-		else if(browser == BrowserType.SAFARI){
+		else if(browser.equals(BrowserType.SAFARI)){
 			wd = new SafariDriver();
 		}
-		else if(browser == BrowserType.IE){
+		else if(browser.equals(BrowserType.IE)){
 			wd = new InternetExplorerDriver();
 		}
-		else if(browser == BrowserType.OPERA_BLINK){ // -Dwebdriver.opera.driver=operadriver  Run/Debug Configurations - JDK Settings - VM Options
+		else if(browser.equals(BrowserType.OPERA_BLINK)){ // -Dwebdriver.opera.driver=operadriver  Run/Debug Configurations - JDK Settings - VM Options
 			wd = new OperaDriver();
 		}
 		if (browser == BrowserType.EDGE){
@@ -50,7 +50,7 @@ public class ApplicationManager {
 			wd = new AppiumDriver();
 		}
 */
-		wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+  		wd.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
 		wd.get("http://localhost/addressbook");
 		groupHelper = new GroupHelper(wd);
 		navigationHelper = new NavigationHelper(wd);

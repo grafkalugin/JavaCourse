@@ -22,7 +22,7 @@ public class ContactCreationTest extends TestBase {
 
 	@DataProvider
 	public Iterator<Object[]> validContactsFromJson() throws IOException {
-		try (BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/contacts.json"))); // нужно менять расширение файла
+		try (BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/contacts.json"))) // нужно менять расширение файла
 		) {
 			String json = "";
 			String line = reader.readLine();

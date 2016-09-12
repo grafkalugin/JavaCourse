@@ -1,0 +1,21 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="Suite1" verbose="1" >
+    <test name="Groups">
+        <classes>
+            <class name="ru.stqa.javacourse.addressbook.tests.GroupCreationTest" />
+            <class name="ru.stqa.javacourse.addressbook.tests.GroupDeletionTest" />
+            <class name="ru.stqa.javacourse.addressbook.tests.GroupModificationTest" />
+        </classes>
+    </test>
+
+    <test name="Contacts">
+        <classes>
+            <class name="ru.stqa.javacourse.addressbook.tests.ContactCreationTest" />
+            <class name="ru.stqa.javacourse.addressbook.tests.ContactModificationTest" />
+            <class name="ru.stqa.javacourse.addressbook.tests.ContactDeletionTest" />
+            <class name="ru.stqa.javacourse.addressbook.tests.ContactPhoneTest" />
+            <class name="ru.stqa.javacourse.addressbook.tests.ContactInfoAboutContactTest" />
+        </classes>
+    </test>
+</suite>

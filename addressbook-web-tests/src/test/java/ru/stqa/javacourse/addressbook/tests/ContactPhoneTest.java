@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
-public class ContactPhoneTests extends TestBase{
+public class ContactPhoneTest extends TestBase{
 
 	@BeforeMethod
 	public void createContactBeforeTestContactPhones(){
@@ -63,7 +63,7 @@ public class ContactPhoneTests extends TestBase{
 		return Arrays.asList(contact.getEmail(), contact.getEmail2(), contact.getEmail3())
 				.stream()
 				.filter((s) -> ! s.equals(""))
-				.map(ContactPhoneTests::cleanedEmail)
+				.map(ContactPhoneTest::cleanedEmail)
 				.collect(Collectors.joining("\n"));
 	}
 
@@ -91,7 +91,7 @@ public class ContactPhoneTests extends TestBase{
 		return Arrays.asList(contact.getHomePhone(), contact.getMobilePhone(), contact.getWorkPhone())
 				.stream()
 				.filter((s) -> ! s.equals(""))
-				.map(ContactPhoneTests::cleaned)
+				.map(ContactPhoneTest::cleaned)
 				.collect(Collectors.joining("\n"));
 	}
 
