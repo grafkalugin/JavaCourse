@@ -8,6 +8,7 @@ import org.testng.Assert;
 import ru.stqa.javacourse.addressbook.model.ContactData;
 import ru.stqa.javacourse.addressbook.model.Contacts;
 
+import java.io.File;
 import java.util.List;
 
 /**
@@ -28,6 +29,7 @@ public class ContactHelper extends HelperBase{
 	}
 
 	public void fillContactForm(ContactData contactData, boolean creation) {
+		File photo = new File("src/test/resources/stru.png");
 		type(By.name("firstname"), contactData.getFirstname());
 		type(By.name("middlename"), contactData.getMiddlename());
 		type(By.name("lastname"), contactData.getLastname());
@@ -39,7 +41,8 @@ public class ContactHelper extends HelperBase{
 		type(By.name("email"), contactData.getEmail());
 		type(By.name("email2"), contactData.getEmail2());
 		type(By.name("email3"), contactData.getEmail3());
-		attach(By.name("photo"), contactData.getPhoto());
+		//attach(By.name("photo"), contactData.getPhoto()); // оригинальное исполнение
+		attach(By.name("photo"), photo); // хардкод
 		if(creation && contactData.getGroup() != null){
 			new Select(wd.findElement(By.name("group name"))).selectByVisibleText(contactData.getGroup());
 		}

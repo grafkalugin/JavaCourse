@@ -56,6 +56,7 @@ public class ContactDataGenerator {
 			writer.write(json);
 		}
 	}	private List<ContactData> generatorContacts(int count) {
+		File photo = new File("src/test/resources/stru.png");
 		List<ContactData> contacts = new ArrayList<ContactData>();
 		for(int i = 0; i < count; i++) {
 			contacts.add(new ContactData()
@@ -68,6 +69,7 @@ public class ContactDataGenerator {
 					.withEmail(String.format("test%s@mail.ru", i))
 					.withEmail2(String.format("test%s@mail.ru", i))
 					.withEmail3(String.format("test%s@mail.ru", i))
+					.withPhoto(photo)
 			);
 		}
 		return contacts;

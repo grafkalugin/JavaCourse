@@ -36,7 +36,7 @@ public class ContactCreationTest extends TestBase {
 		}
 	}
 
-	@Test (dataProvider = "validContactsFromJson")
+	@Test(dataProvider = "validContactsFromJson", enabled = false)
     public void testContactCreation(ContactData contactdata) {
 		app.goTo().goHome();
 		Contacts before = app.contact().allContacts();
@@ -57,6 +57,18 @@ public class ContactCreationTest extends TestBase {
 		app.contact().createContact(contactdata);
 		assertThat(app.contact().count(), equalTo(before.size() +  1));
 		Contacts after = app.contact().allContacts();
+		assertThat(after, equalTo(before.withAdded(contactdata.withId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt()))));
+	}
+
+	@Test (dataProvider = "validContactsFromJson")
+	public void testContactCreationDb(ContactData contactdata) {
+		app.goTo().goHome();
+		Contacts before = app.db().contacts();
+		app.goTo().goToContactCreation();
+		File photo = new File("src/test/resources/stru.png");
+		app.contact().createContact(contactdata);
+		assertThat(app.contact().count(), equalTo(before.size() +  1));
+		Contacts after = app.db().contacts();
 		assertThat(after, equalTo(before.withAdded(contactdata.withId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt()))));
 	}
 
