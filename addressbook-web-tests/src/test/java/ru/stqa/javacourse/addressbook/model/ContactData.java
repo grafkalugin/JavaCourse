@@ -1,36 +1,61 @@
 package ru.stqa.javacourse.addressbook.model;
 
 import com.google.gson.annotations.Expose;
+import org.hibernate.annotations.Type;
 
+import javax.persistence.*;
 import java.io.File;
-
+@Entity
+@Table(name = "addressbook")
 public class ContactData {
 	@Expose // поле помеченное для добавления в json
+	@Column(name="firstname")
 	private String firstname;
 	private String middlename;
 	@Expose
+	@Column(name="lastname")
 	private String lastname;
 	private String nickname;
 	@Expose
+	@Type(type = "text")
 	private String address;
+	@Transient
+	@Type(type = "text")
 	private String phone;
 	@Expose
+	@Type(type = "text")
 	private String email;
 	@Expose
+	@Type(type = "text")
 	private String email2;
 	@Expose
+	@Type(type = "text")
 	private String email3;
-	private String group;
+	@Transient // аннотация отмечает поле как пропущенное
+	private String group; // transient private String group; - действует аналогично  - @Transient  - аннотация отмечает поле как пропущенное
 	@Expose
+	@Column(name="home")
+	@Type(type = "text")
 	private String homePhone;
 	@Expose
+	@Column(name="mobile")
+	@Type(type = "text")
 	private String mobilePhone;
 	@Expose
+	@Column(name="work")
+	@Type(type = "text")
 	private String workPhone;
+	@Transient
 	private String allPhones;
+	@Transient
 	private String allEmails;
+	@Transient
 	private String allDataFromInfoPage;
-	private File photo;
+	@Column(name="photo")
+	@Type(type = "text")
+	private String photo;
+	@Id
+	@Column(name="id")
 	int id = Integer.MAX_VALUE;
 
 	public String getAllPhones() {return allPhones;}
@@ -77,7 +102,7 @@ public class ContactData {
 
 	public String getAllDataFromInfoPage() {return allDataFromInfoPage;}
 
-	public File getPhoto() {return photo;}
+	public File getPhoto() {return new File(photo);}
 
 	public ContactData withLastname(String lastname) {
 		this.lastname = lastname;
@@ -164,7 +189,7 @@ public class ContactData {
 		return this;
 	}
 	public ContactData withPhoto(File photo) {
-		this.photo = photo;
+		this.photo = photo.getPath();
 		return this;
 	}
 

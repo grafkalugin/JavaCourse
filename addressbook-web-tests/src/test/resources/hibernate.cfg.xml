@@ -36,6 +36,7 @@
 
         <!-- <mapping resource = "ru.stqa.javacourse.addressbook.model.GroupData"/> resource указывал бы на другой XML-файл с описанием привязки. а мы её описали в виде аннотаций непосредственно в классе -->
         <mapping class = "ru.stqa.javacourse.addressbook.model.GroupData"/>
+        <mapping class = "ru.stqa.javacourse.addressbook.model.ContactData"/>
 
     </session-factory>
 
