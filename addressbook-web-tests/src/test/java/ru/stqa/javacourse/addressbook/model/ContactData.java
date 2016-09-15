@@ -102,7 +102,13 @@ public class ContactData {
 
 	public String getAllDataFromInfoPage() {return allDataFromInfoPage;}
 
-	public File getPhoto() {return new File(photo);}
+	public File getPhoto() {
+		if (photo == null) {
+			return null;
+		} else {
+			return new File(photo);
+		}
+	}
 
 	public ContactData withLastname(String lastname) {
 		this.lastname = lastname;

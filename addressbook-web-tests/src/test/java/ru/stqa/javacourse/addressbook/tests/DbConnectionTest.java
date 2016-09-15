@@ -4,26 +4,30 @@ import org.testng.annotations.Test;
 import ru.stqa.javacourse.addressbook.model.GroupData;
 import ru.stqa.javacourse.addressbook.model.Groups;
 
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.sql.*;
+import java.util.Properties;
 
 @Test
 public class DbConnectionTest {
-	//final private Properties properties;
-	//private String dbConn;
+	final private Properties properties;
+	private String dbConn;
 
-	/*public DbConnectionTest(String dbConn) {
+	public DbConnectionTest(String dbConn) {
 		this.dbConn = dbConn;
 		properties = new Properties();
-	}*/
+	}
 
 	public void testDbConnection() throws IOException {
 
-		//String target2 = System.getProperty("target2", "local");
-		//properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties", target2))));
+		String target2 = System.getProperty("target2", "local");
+		properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties", target2))));
 		Connection conn = null;
 		try {
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/addressbook?serverTimezone=UTC&user=root&password=");//conn = DriverManager.getConnection("web.dbAddress");
+			//conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/addressbook?serverTimezone=UTC&user=root&password=");
+			conn = DriverManager.getConnection(properties.getProperty("web.dbAddress"));
 
 			Statement st = conn.createStatement();
 			ResultSet rs = st.executeQuery("select group_id, group_name, group_header, group_footer from group_list");

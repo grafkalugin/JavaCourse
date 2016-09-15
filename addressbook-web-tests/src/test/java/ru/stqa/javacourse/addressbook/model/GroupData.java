@@ -25,6 +25,16 @@ public class GroupData {
 	private  String name;
 
 	@Override
+	public String toString() {
+		return "GroupData{" +
+				"id=" + id +
+				", name='" + name + '\'' +
+				", header='" + header + '\'' +
+				", footer='" + footer + '\'' +
+				'}';
+	}
+
+	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
@@ -93,11 +103,4 @@ public class GroupData {
 	}
 
 
-	@Override
-	public String toString() {
-		return "GroupData{" +
-				"name='" + name + '\'' +
-				", id=" + id +
-				'}';
-	}
 }

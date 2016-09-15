@@ -12,7 +12,7 @@ import ru.stqa.javacourse.addressbook.model.Groups;
 
 import java.util.List;
 
-public class DbHelper {
+public class  DbHelper {
 	private final SessionFactory sessionFactory;
 
 	public DbHelper(){
