@@ -9,9 +9,8 @@ import java.util.Set;
 public class Groups extends ForwardingSet<GroupData> {
 	private Set<GroupData> delegate;
 
-	public Groups(Groups groups) {
-		this.delegate= new HashSet<GroupData>(groups.delegate);
-	}
+	// public Groups(Groups groups) {this.delegate = new List<GroupData>(groups.delegate);} // тестовая замена типа списка
+	 public Groups(Groups groups) {this.delegate = new HashSet<GroupData>(groups.delegate);} // тестовая замена типа списка
 
 	public Groups() {
 		this.delegate = new HashSet<>();

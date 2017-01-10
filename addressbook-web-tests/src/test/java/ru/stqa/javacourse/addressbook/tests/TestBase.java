@@ -8,9 +8,15 @@ import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 import ru.stqa.javacourse.addressbook.appmanager.ApplicationManager;
+import ru.stqa.javacourse.addressbook.model.GroupData;
+import ru.stqa.javacourse.addressbook.model.Groups;
 
 import java.lang.reflect.Method;
 import java.util.Arrays;
+import java.util.stream.Collectors;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
 
 public class  TestBase {
 	Logger logger = LoggerFactory.getLogger(TestBase.class);
@@ -44,4 +50,13 @@ public class  TestBase {
 
 	}
 
+	public void verifyGroupListInUI() {
+		if (Boolean.getBoolean("verifyUI")){ // берётся системная переменная VM options -ea -DverifyUI=true
+			Groups dbGroups = app.db().groups();
+			Groups uiGroups = app.group().all();
+			assertThat(uiGroups, equalTo(dbGroups.stream()
+					.map((g) -> new GroupData().withId(g.getId()).withName(g.getName()))
+					.collect(Collectors.toSet())));
+		}
+	}
 }

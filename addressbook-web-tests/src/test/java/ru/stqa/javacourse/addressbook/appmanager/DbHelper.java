@@ -27,6 +27,7 @@ public class  DbHelper {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 		List<GroupData> result = session.createQuery( "from GroupData" ).list();
+		// HashSet<GroupData> result = session.createQuery( "from GroupData" ).list(); // изменён тип коллекции
 		session.getTransaction().commit();
 		session.close();
 		return new Groups(result);

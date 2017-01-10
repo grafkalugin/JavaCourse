@@ -60,5 +60,7 @@ public class GroupModificationTest extends TestBase {
 		Groups after = app.db().groups(); // список получаем напрямую из db
 		//Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after)); // сравнение списков преобразованных в множества
 		assertThat(after, equalTo(before.without(modifiedGroup).withAdded(group)));
+		verifyGroupListInUI();
 	}
+
 }

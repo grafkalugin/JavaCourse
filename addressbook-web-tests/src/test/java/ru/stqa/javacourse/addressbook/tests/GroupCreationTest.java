@@ -45,7 +45,7 @@ public class GroupCreationTest extends TestBase {
 	@DataProvider
 	public Iterator<Object[]> validGroupsFromJson() throws IOException {
 		//List<Object[]> list = new ArrayList<Object[]>(); // не нужен в xml
-		try(BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/groups.json"))); // нужно менять расширение файла
+		try(BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/groups.json"))) // нужно менять расширение файла
 		)   {
 			String json = "";
 			String line = reader.readLine();
@@ -61,7 +61,7 @@ public class GroupCreationTest extends TestBase {
 		}
 	}
 
-    @Test(dataProvider = "validGroupsFromJson")
+    @Test(dataProvider = "validGroupsFromJson", enabled = false)
     public void testGroupCreation(GroupData group) {
 	    //GroupData group = new GroupData().withName("group name");
 	    app.goTo().groupPage();
@@ -73,7 +73,19 @@ public class GroupCreationTest extends TestBase {
 			    before.withAdded(group.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
     }
 
-	@Test
+	@Test(dataProvider = "validGroupsFromJson")
+	public void testGroupCreationDb(GroupData group) {
+		//GroupData group = new GroupData().withName("group name");
+		app.goTo().groupPage();
+		Groups before = app.db().groups();
+		app.group().create(group);
+		Groups after = app.db().groups();
+		assertThat(after.size(), equalTo(before.size() + 1));
+		assertThat(after, equalTo(
+				before.withAdded(group.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
+	}
+
+	@Test(enabled = false)
 	public void testBadGroupCreation() {
 		GroupData group = new GroupData().withName("group name 2'");
 		app.goTo().groupPage();
